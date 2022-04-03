@@ -1,0 +1,46 @@
+html {
+    box-sizing: border-box;
+}
+*, *::after, *::before {
+    box-sizing: inherit;
+}
+body {
+    margin: 0;
+}
+#container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5vh;
+    width: 90vw;
+    height: 100vh;
+}
+#left {
+    flex: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 10vh;
+    margin-left: 5vw;
+}
+#left button {
+    flex: auto;
+    width: 75%;
+    height: 20%;
+    min-width: min-content;
+    min-height: min-content;
+}
+#left input {
+    flex: auto;
+    width: 75%;
+    margin: 0;
+}
+#left span {
+    flex: auto;
+    align-self: center;
+    justify-self: center;
+    width: 65%;
+    font-size: 10vh;
+}
+#right {
+    flex: auto;
+    font-size: 10vh;
+}
