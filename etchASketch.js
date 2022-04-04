@@ -1,17 +1,15 @@
-const container = document.getElementById('container');
 const left = document.getElementById('left');
 const colors = document.getElementById('colors');
 const rainbow = document.getElementById('rainbow');
 const eraser = document.getElementById('eraser');
 const clear = document.getElementById('clear')
-const right = document.getElementById('right');
 const slider = document.getElementById('slider');
 const sliderLabel = document.getElementById('sliderLabel');
-const sliderDiv = document.getElementById('sliderDiv');
 const wrapper = document.getElementById('wrapper');
 
 //Change color of gridcell on mouseclick
 let color= 'brown'
+let previuseColor;
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
 }
@@ -27,6 +25,10 @@ const chooseColor = function(e) {
         colorBox.style.cssText = `background-color: ${colorBox.id}; border: 1px solid black; width:100%; height:100%;`;
         colorBox.onclick = () => {
             left.removeChild(colorDiv);
+            if (random) {
+                wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
+                random = !random;
+            }
             return color=allColors[i];
         }
         console.log(colorBox);
@@ -80,12 +82,13 @@ eraser.addEventListener('click', () => {
         if (random) {
             wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor))
         }
+        previuseColor = color;
         return color = 'white';
     }else {
         if (random) {
             return (wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor)));
         }
-        return color='brown';
+        return color=previuseColor;
 }});
 //randomize color choice
 const randomColor = function() {
@@ -100,6 +103,6 @@ rainbow.addEventListener('click', () => {
         wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor));
     } else {
         wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
-        return color = 'brown';
+        return color = previuseColor;
     }
 })
