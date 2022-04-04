@@ -11,7 +11,7 @@ const sliderDiv = document.getElementById('sliderDiv');
 const wrapper = document.getElementById('wrapper');
 
 //Change color of gridcell on mouseclick
-const color= 'brown'
+let color= 'brown'
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
 }
@@ -25,15 +25,13 @@ const grid = function(num){
     let identity = 0;
     for(let i=0; i<num; i++) {
         for (let j=0; j<num; j++) {
+            //create gridcells and append them to wrapper
             let gridCell = document.createElement('div');
             gridCell.classList.add('items');
             gridCell.setAttribute('id', `${identity}`);
             gridCell.style.cssText = 'width:100%; height:100%; border: 1px solid black; border-radius: 6px; aspect-ratio: 1;';
             gridCell.addEventListener('mousedown', changeCellColor)
             wrapper.appendChild(gridCell);
-            //testing
-            let cell = document.getElementById(`${identity}`);
-            console.log(cell.id)
             //increment identity for next cell
             ++identity;
         }
@@ -54,3 +52,10 @@ clear.addEventListener('click', () => wrapper.childNodes.forEach(
     function (node) {
         return node.style.backgroundColor = 'white';
     }));
+//Erase chosen gridcell
+let erasing = false;
+eraser.addEventListener('click', () => {
+    erasing = !erasing;
+    if (erasing) color = 'white';
+    else color='brown';
+});
