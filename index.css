@@ -20,13 +20,13 @@ body {
     flex-flow: column nowrap;
     margin-top: 10vh;
     margin-left: 5vw;
+    min-width: max-content;
+    min-height: max-content;
 }
 #left button {
     flex: auto;
     width: 75%;
     height: 20%;
-    min-width: min-content;
-    min-height: min-content;
 }
 #left input {
     flex: auto;

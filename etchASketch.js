@@ -37,7 +37,7 @@ const grid = function(num){
         }
     }
 }
-//initiate grid with defoult slider value
+//initiate grid with default slider value
 grid(slider.value);
 //display slider value and pass value to grid()
 sliderLabel.textContent = slider.value;
@@ -56,23 +56,30 @@ clear.addEventListener('click', () => wrapper.childNodes.forEach(
 let erasing = false;
 eraser.addEventListener('click', () => {
     erasing = !erasing;
-    if (erasing) color = 'white';
-    else color='brown';
-});
+    if (erasing) {
+        if (random) {
+            wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor))
+        }
+        return color = 'white';
+    }else {
+        if (random) {
+            return (wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor)));
+        }
+        return color='brown';
+}});
 //randomize color choice
-const randomcolor = function() {
-    return (Math.floor(Math.random()*16777215).toString(16));
-}
-const randomCellColor = function(e) {
-    return color = `#${randomcolor()}`;
+const randomColor = function() {
+    const hex = Math.floor(Math.random()*16777215).toString(16);
+    return color = `#${hex}`;
 }
 random = false;
 rainbow.addEventListener('click', () => {
     random = !random;
     if(random){
-        wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomCellColor));
+        if (erasing) erasing = !erasing;
+        wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor));
     } else {
-        wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomCellColor));
+        wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
         return color = 'brown';
     }
 })
