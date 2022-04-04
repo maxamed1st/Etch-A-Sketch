@@ -59,3 +59,20 @@ eraser.addEventListener('click', () => {
     if (erasing) color = 'white';
     else color='brown';
 });
+//randomize color choice
+const randomcolor = function() {
+    return (Math.floor(Math.random()*16777215).toString(16));
+}
+const randomCellColor = function(e) {
+    return color = `#${randomcolor()}`;
+}
+random = false;
+rainbow.addEventListener('click', () => {
+    random = !random;
+    if(random){
+        wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomCellColor));
+    } else {
+        wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomCellColor));
+        return color = 'brown';
+    }
+})
