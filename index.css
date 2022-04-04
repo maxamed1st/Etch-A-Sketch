@@ -26,7 +26,7 @@ body {
 #left button {
     flex: auto;
     width: 75%;
-    height: 20%;
+    height: 10vh;
 }
 #left input {
     flex: auto;

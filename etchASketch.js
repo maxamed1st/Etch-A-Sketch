@@ -15,6 +15,26 @@ let color= 'brown'
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
 }
+//color button
+allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
+const chooseColor = function(e) {
+    colorDiv = document.createElement('div');
+    colorDiv.style.cssText = "display: grid; grid-template-columns: repeat(3, 1fr);\
+     grid-template-rows: repeat(2, 1fr); border:1px solid black; height: 10vh; width: 75%;"
+    for(let i=0; i<allColors.length; i++) {
+        colorBox = document.createElement('div');
+        colorBox.setAttribute('id', allColors[i])
+        colorBox.style.cssText = `background-color: ${colorBox.id}; border: 1px solid black; width:100%; height:100%;`;
+        colorBox.onclick = () => {
+            left.removeChild(colorDiv);
+            return color=allColors[i];
+        }
+        console.log(colorBox);
+        colorDiv.appendChild(colorBox);
+    }
+    left.insertBefore(colorDiv, rainbow);
+}
+colors.addEventListener('click', chooseColor);
 //create a num*num grid in the right container
 const grid = function(num){
     while(wrapper.lastChild) {
