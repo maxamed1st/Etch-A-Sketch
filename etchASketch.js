@@ -12,11 +12,14 @@ let color= 'brown'
 let previuseColor;
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
+    console.log('color', color, 'previescolor', previuseColor);
 }
 //color button
 allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
 const chooseColor = function(e) {
+    if (document.getElementById('colorDiv')) return document.getElementById('colorDiv').remove();
     colorDiv = document.createElement('div');
+    colorDiv.setAttribute('id', 'colorDiv');
     colorDiv.style.cssText = "display: grid; grid-template-columns: repeat(3, 1fr);\
      grid-template-rows: repeat(2, 1fr); border:1px solid black; height: 10vh; width: 75%;"
     for(let i=0; i<allColors.length; i++) {
@@ -31,7 +34,6 @@ const chooseColor = function(e) {
             }
             return color=allColors[i];
         }
-        console.log(colorBox);
         colorDiv.appendChild(colorBox);
     }
     left.insertBefore(colorDiv, rainbow);
@@ -56,6 +58,7 @@ const grid = function(num){
             wrapper.appendChild(gridCell);
             //increment identity for next cell
             ++identity;
+            //test color values
         }
     }
 }
@@ -101,8 +104,15 @@ rainbow.addEventListener('click', () => {
     if(random){
         if (erasing) erasing = !erasing;
         wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor));
+        previuseColor = color;
     } else {
         wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
         return color = previuseColor;
     }
 })
+/* CRITIQUE
+Show the color that is currently chosen
+show when eraser or/and rainbow is activated
+add 'grid size' to sliderLabel
+put more effort on the design
+*/
