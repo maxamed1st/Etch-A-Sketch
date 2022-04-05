@@ -85,7 +85,7 @@ eraser.addEventListener('click', () => {
         if (random) {
             wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor))
         }
-        previuseColor = color;
+        if(!color.startsWith('#')) previuseColor = color;
         return color = 'white';
     }else {
         if (random) {
@@ -104,7 +104,7 @@ rainbow.addEventListener('click', () => {
     if(random){
         if (erasing) erasing = !erasing;
         wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor));
-        previuseColor = color;
+        if(!color.startsWith('w')) previuseColor = color;
     } else {
         wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
         return color = previuseColor;

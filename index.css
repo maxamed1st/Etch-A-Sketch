@@ -28,17 +28,20 @@ body {
     width: 75%;
     height: 10vh;
 }
-#left input {
+#left div {
     flex: auto;
+    display: flex;
+    flex-flow: column nowrap;
     width: 75%;
-    margin: 0;
+    height: 10vh;
+    font-size: 4vh;
 }
-#left span {
-    flex: auto;
-    align-self: center;
+#left div input {
+    width: 100%;
+}
+#left div span {
     justify-self: center;
-    width: 65%;
-    font-size: 10vh;
+    align-self: center;
 }
 #right {
     flex: auto;
