@@ -11,12 +11,16 @@
     <div id="container">
         <div id="left">
             <!--Colors rainbow 'click or not' eraser clear grid -->
+            <span id="currentColorSpan">
+                <div id="currentColor">
+                </div>
+            </span>
             <button id="colors">colors</button>
             <button id="rainbow">Rainbow</button>
             <button id="eraser">Eraser</button>
             <button id="clear">Clear</button>
             <!--Slider for the grid-->
-            <div>
+            <div id="gridSize">
                 <span>Grid: <span id="sliderLabel"></span></span>
                 <input type="range" min="2" max="26" value="16" id="slider">
             </div>

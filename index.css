@@ -23,12 +23,24 @@ body {
     min-width: max-content;
     min-height: max-content;
 }
+#left #currentColorSpan {
+    display: flex;
+    justify-content: center;
+    width: 75%;
+}
+#left #currentColor {
+    border-radius: 50%;
+    width: 15vw;
+    height: 15vh;
+    margin-bottom: 4px;
+    background-color: brown;
+}
 #left button {
     flex: auto;
     width: 75%;
     height: 10vh;
 }
-#left div {
+#left #gridSize {
     flex: auto;
     display: flex;
     flex-flow: column nowrap;
@@ -36,10 +48,10 @@ body {
     height: 10vh;
     font-size: 4vh;
 }
-#left div input {
+#left #gridSize input {
     width: 100%;
 }
-#left div span {
+#left #gridSize span {
     justify-self: center;
     align-self: center;
 }

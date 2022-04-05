@@ -6,12 +6,14 @@ const clear = document.getElementById('clear')
 const slider = document.getElementById('slider');
 const sliderLabel = document.getElementById('sliderLabel');
 const wrapper = document.getElementById('wrapper');
+const currentColor = document.getElementById('currentColor');
 
 //Change color of gridcell on mouseclick
 let color= 'brown'
 let previuseColor;
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
+    currentColor.style.background = `${color}`;
     console.log('color', color, 'previescolor', previuseColor);
 }
 //color button
@@ -113,6 +115,5 @@ rainbow.addEventListener('click', () => {
 /* CRITIQUE
 Show the color that is currently chosen
 show when eraser or/and rainbow is activated
-add 'grid size' to sliderLabel
 put more effort on the design
 */
