@@ -13,9 +13,7 @@ let color= 'brown'
 let previuseColor;
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
-    currentColor.style.background = `${color}`;
-    console.log('color', color, 'previescolor', previuseColor);
-}
+    if(color.startsWith('#')) currentColor.style.background = `${color}`;
 //color button
 allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
 const chooseColor = function(e) {
@@ -34,7 +32,10 @@ const chooseColor = function(e) {
                 wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
                 random = !random;
             }
-            return color=allColors[i];
+            if (!color.startsWith('#') && !color.startsWith('w')) previuseColor = color;
+            color=allColors[i];
+            currentColor.style.background = `${color}`;
+            return color;
         }
         colorDiv.appendChild(colorBox);
     }
@@ -88,11 +89,13 @@ eraser.addEventListener('click', () => {
             wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor))
         }
         if(!color.startsWith('#')) previuseColor = color;
+        currentColor.style.backgroundImage = "url(img/eraser.jpg)";
         return color = 'white';
     }else {
         if (random) {
             return (wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor)));
         }
+        currentColor.style.background = `${previuseColor}`;
         return color=previuseColor;
 }});
 //randomize color choice
@@ -100,7 +103,7 @@ const randomColor = function() {
     const hex = Math.floor(Math.random()*16777215).toString(16);
     return color = `#${hex}`;
 }
-random = false;
+let random = false;
 rainbow.addEventListener('click', () => {
     random = !random;
     if(random){
@@ -113,7 +116,6 @@ rainbow.addEventListener('click', () => {
     }
 })
 /* CRITIQUE
-Show the color that is currently chosen
 show when eraser or/and rainbow is activated
 put more effort on the design
 */
