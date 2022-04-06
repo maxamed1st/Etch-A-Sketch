@@ -128,10 +128,8 @@ rainbow.addEventListener('click', () => {
 //Show when eraser or/and rainbow is activated 
 const isActive = function(boolean, node) {
     if (boolean) {
-        console.log('true')
         return node.style.backgroundColor = '#4d908e';
     }else {
-        console.log('false')
         return node.style.backgroundColor = '#577590';
     }
 }
