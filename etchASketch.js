@@ -34,6 +34,10 @@ const chooseColor = function(e) {
                 random = !random;
                 isActive(random, rainbow);
             }
+            if (erasing) {
+                erasing = !erasing;
+                isActive(erasing, eraser);
+            }
             if (!color.startsWith('#') && !color.startsWith('w')) previuseColor = color;
             color=allColors[i];
             currentColor.style.background = `${color}`;
