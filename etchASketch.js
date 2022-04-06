@@ -32,6 +32,7 @@ const chooseColor = function(e) {
             if (random) {
                 wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
                 random = !random;
+                isActive(random, rainbow);
             }
             if (!color.startsWith('#') && !color.startsWith('w')) previuseColor = color;
             color=allColors[i];
@@ -90,9 +91,11 @@ eraser.addEventListener('click', () => {
             wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor))
         }
         if(!color.startsWith('#')) previuseColor = color;
+        isActive(erasing, eraser);
         currentColor.style.backgroundImage = "url(img/eraser.jpg)";
         return color = 'white';
     }else {
+        isActive(erasing, eraser);
         if (random) {
             return (wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor)));
         }
@@ -108,16 +111,27 @@ let random = false;
 rainbow.addEventListener('click', () => {
     random = !random;
     if(random){
-        if (erasing) erasing = !erasing;
+        if (erasing) {
+            erasing = !erasing;
+            isActive(erasing, eraser);
+        }
+        isActive(random, rainbow);
         wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor));
         if(!color.startsWith('w')) previuseColor = color;
     } else {
+        isActive(random, rainbow);
         wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
+        currentColor.style.background = `${previuseColor}`;
         return color = previuseColor;
     }
 })
 //Show when eraser or/and rainbow is activated 
-if (random) rainbow.style.backgroundColor = '#4d908e';
-else rainbow.style.backgroundColor = '#577590';
-if (erasing) eraser.style.backgroundColor = '#4d908e';
-else eraser.style.backgroundColor = '#577590';
+const isActive = function(boolean, node) {
+    if (boolean) {
+        console.log('true')
+        return node.style.backgroundColor = '#4d908e';
+    }else {
+        console.log('false')
+        return node.style.backgroundColor = '#577590';
+    }
+}
