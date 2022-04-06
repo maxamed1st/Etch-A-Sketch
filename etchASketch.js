@@ -13,7 +13,7 @@ let color= 'brown'
 let previuseColor;
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
-    if(color.startsWith('#')) currentColor.style.background = `${color}`;
+    if (color.startsWith('#')) currentColor.style.background = `${color}`;
 }
 //color button
 allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
@@ -94,7 +94,7 @@ eraser.addEventListener('click', () => {
         if (random) {
             wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor))
         }
-        if(!color.startsWith('#')) previuseColor = color;
+        if (!color.startsWith('#')) previuseColor = color;
         isActive(erasing, eraser);
         currentColor.style.backgroundImage = "url(img/eraser.jpg)";
         return color = 'white';
@@ -114,14 +114,14 @@ const randomColor = function() {
 let random = false;
 rainbow.addEventListener('click', () => {
     random = !random;
-    if(random){
+    if (random){
         if (erasing) {
             erasing = !erasing;
             isActive(erasing, eraser);
         }
         isActive(random, rainbow);
         wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor));
-        if(!color.startsWith('w')) previuseColor = color;
+        if (!color.startsWith('w')) previuseColor = color;
     } else {
         isActive(random, rainbow);
         wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
