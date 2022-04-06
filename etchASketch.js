@@ -14,6 +14,7 @@ let previuseColor;
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
     if(color.startsWith('#')) currentColor.style.background = `${color}`;
+}
 //color button
 allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
 const chooseColor = function(e) {
@@ -115,7 +116,8 @@ rainbow.addEventListener('click', () => {
         return color = previuseColor;
     }
 })
-/* CRITIQUE
-show when eraser or/and rainbow is activated
-put more effort on the design
-*/
+//Show when eraser or/and rainbow is activated 
+if (random) rainbow.style.backgroundColor = '#4d908e';
+else rainbow.style.backgroundColor = '#577590';
+if (erasing) eraser.style.backgroundColor = '#4d908e';
+else eraser.style.backgroundColor = '#577590';

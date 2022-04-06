@@ -39,6 +39,11 @@ body {
     flex: auto;
     width: 75%;
     height: 10vh;
+    border-radius: 15%;
+    background-color: #577590;
+}
+#left button:hover {
+    background-color: #4d908e;
 }
 #left #gridSize {
     flex: auto;
