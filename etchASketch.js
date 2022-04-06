@@ -15,9 +15,26 @@ const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
     if (color.startsWith('#')) currentColor.style.background = `${color}`;
 }
+//
+const chooseColor = function(colorId){
+    left.removeChild(colorDiv);
+    if (random) {
+        wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
+        random = !random;
+        isActive(random, rainbow);
+    }
+    if (erasing) {
+        erasing = !erasing;
+        isActive(erasing, eraser);
+    }
+    if (!color.startsWith('#') && !color.startsWith('w')) previuseColor = color;
+    color=colorId;
+    currentColor.style.background = `${color}`;
+    return color;
+}
 //color button
 allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
-const chooseColor = function(e) {
+const colorOptions = function(e) {
     if (document.getElementById('colorDiv')) return document.getElementById('colorDiv').remove();
     colorDiv = document.createElement('div');
     colorDiv.setAttribute('id', 'colorDiv');
@@ -27,27 +44,12 @@ const chooseColor = function(e) {
         colorBox = document.createElement('div');
         colorBox.setAttribute('id', allColors[i])
         colorBox.style.cssText = `background-color: ${colorBox.id}; border: 1px solid black; width:100%; height:100%;`;
-        colorBox.onclick = () => {
-            left.removeChild(colorDiv);
-            if (random) {
-                wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
-                random = !random;
-                isActive(random, rainbow);
-            }
-            if (erasing) {
-                erasing = !erasing;
-                isActive(erasing, eraser);
-            }
-            if (!color.startsWith('#') && !color.startsWith('w')) previuseColor = color;
-            color=allColors[i];
-            currentColor.style.background = `${color}`;
-            return color;
-        }
+        colorBox.onclick = chooseColor.bind(colorDiv, colorBox.id);
         colorDiv.appendChild(colorBox);
     }
     left.insertBefore(colorDiv, rainbow);
 }
-colors.addEventListener('click', chooseColor);
+colors.addEventListener('click', colorOptions);
 //create a num*num grid in the right container
 const grid = function(num){
     while(wrapper.lastChild) {
