@@ -6,30 +6,27 @@ const clear = document.getElementById('clear')
 const slider = document.getElementById('slider');
 const sliderLabel = document.getElementById('sliderLabel');
 const wrapper = document.getElementById('wrapper');
-const currentColor = document.getElementById('currentColor');
+const currentColor = document.getElementById('currentColor').style;
 
 //Change color of gridcell on mouseclick
 let color= 'brown'
 let previuseColor;
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
-    if (color.startsWith('#')) currentColor.style.background = `${color}`;
+}
+//set previuseColor
+const setPreviuseColor = function () {
+    if (!color.startsWith('#') && !color.startsWith('w')) 
+        return previuseColor = color;
 }
 //
 const chooseColor = function(colorId){
     left.removeChild(colorDiv);
-    if (random) {
-        wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
-        random = !random;
-        isActive(random, rainbow);
-    }
-    if (erasing) {
-        erasing = !erasing;
-        isActive(erasing, eraser);
-    }
-    if (!color.startsWith('#') && !color.startsWith('w')) previuseColor = color;
+    deactivate(random, rainbow);
+    deactivate(erasing, eraser);
+    setPreviuseColor();
     color=colorId;
-    currentColor.style.background = `${color}`;
+    currentColor.background = `${color}`;
     return color;
 }
 //color button
@@ -69,7 +66,6 @@ const grid = function(num){
             wrapper.appendChild(gridCell);
             //increment identity for next cell
             ++identity;
-            //test color values
         }
     }
 }
@@ -93,49 +89,73 @@ let erasing = false;
 eraser.addEventListener('click', () => {
     erasing = !erasing;
     if (erasing) {
-        if (random) {
-            wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor))
-        }
-        if (!color.startsWith('#')) previuseColor = color;
-        isActive(erasing, eraser);
-        currentColor.style.backgroundImage = "url(img/eraser.jpg)";
+        rainbowCells(0);
+        setPreviuseColor();
+        showState(erasing, eraser);
+        currentColor.background = "gray";
         return color = 'white';
     }else {
-        isActive(erasing, eraser);
+        showState(erasing, eraser);
+        currentColor.background = `${previuseColor}`;
+        color=previuseColor;
         if (random) {
-            return (wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor)));
+            return rainbowCells(random);
         }
-        currentColor.style.background = `${previuseColor}`;
-        return color=previuseColor;
+        return color;
 }});
 //randomize color choice
 const randomColor = function() {
     const hex = Math.floor(Math.random()*16777215).toString(16);
-    return color = `#${hex}`;
+    color = `#${hex}`;
+    currentColor.background = color;
+    return color;
 }
 let random = false;
 rainbow.addEventListener('click', () => {
     random = !random;
     if (random){
-        if (erasing) {
-            erasing = !erasing;
-            isActive(erasing, eraser);
-        }
-        isActive(random, rainbow);
-        wrapper.childNodes.forEach(child => child.addEventListener('mousedown', randomColor));
-        if (!color.startsWith('w')) previuseColor = color;
+        deactivate(erasing, eraser);
+        showState(random, rainbow);
+        setPreviuseColor();
+        rainbowCells(random);
     } else {
-        isActive(random, rainbow);
-        wrapper.childNodes.forEach(child => child.removeEventListener('mousedown', randomColor));
-        currentColor.style.background = `${previuseColor}`;
+        showState(random, rainbow);
+        rainbowCells(random);
+        currentColor.background = `${previuseColor}`;
         return color = previuseColor;
     }
 })
+//randomize cell colors
+const rainbowCells = function(random) {
+    if(random) {
+        wrapper.childNodes.forEach(child => child.addEventListener('mouseup', randomColor));
+    } else {
+        wrapper.childNodes.forEach(child => child.removeEventListener('mouseup', randomColor));
+    }
+}
 //Show when eraser or/and rainbow is activated 
-const isActive = function(boolean, node) {
+const showState = function(boolean, node) {
     if (boolean) {
         return node.style.backgroundColor = '#4d908e';
     }else {
         return node.style.backgroundColor = '#577590';
     }
 }
+//deactivate eraser or rainbow
+const deactivate = function(boolean, node) {
+    if (node===rainbow) {
+        if(boolean) {
+            random = !random;
+            rainbowCells(random);
+            showState(random, rainbow);
+            return random;
+        }
+    }else {
+        if (boolean) {
+            erasing = !erasing;
+            showState(erasing, eraser);
+            return erasing;
+        }
+    }
+}
+window.addEventListener('click', () => console.log(color, previuseColor));
