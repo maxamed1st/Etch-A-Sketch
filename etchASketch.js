@@ -96,11 +96,13 @@ eraser.addEventListener('click', () => {
         return color = 'white';
     }else {
         showState(erasing, eraser);
-        currentColor.background = `${previuseColor}`;
-        color=previuseColor;
         if (random) {
+            randomColor();
+            currentColor.background = `${color}`;
             return rainbowCells(random);
         }
+        currentColor.background = `${previuseColor}`;
+        color=previuseColor;
         return color;
 }});
 //randomize color choice
@@ -117,6 +119,7 @@ rainbow.addEventListener('click', () => {
         deactivate(erasing, eraser);
         showState(random, rainbow);
         setPreviuseColor();
+        randomColor();
         rainbowCells(random);
     } else {
         showState(random, rainbow);
@@ -133,7 +136,7 @@ const rainbowCells = function(random) {
         wrapper.childNodes.forEach(child => child.removeEventListener('mouseup', randomColor));
     }
 }
-//Show when eraser or/and rainbow is activated 
+//Show when eraser or rainbow is activated 
 const showState = function(boolean, node) {
     if (boolean) {
         return node.style.backgroundColor = '#4d908e';
