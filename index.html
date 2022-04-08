@@ -9,27 +9,34 @@
 </head>
 <body>
     <div id="container">
-        <div id="left">
-            <!--Colors rainbow 'click or not' eraser clear grid -->
+        <header>
             <span id="currentColorSpan">
                 <div id="currentColor">
                 </div>
             </span>
-            <button id="colors">colors</button>
-            <button id="rainbow">Rainbow</button>
-            <button id="eraser">Eraser</button>
-            <button id="clear">Clear</button>
-            <!--Slider for the grid-->
-            <div id="gridSize">
-                <span>Grid: <span id="sliderLabel"></span></span>
-                <input type="range" min="2" max="26" value="16" id="slider">
+            <span id="titleSpan">Etch-A-Sketch</span>
+        </header>
+        <main>
+            <div id="left">
+                <!--Colors rainbow 'click or not' eraser clear grid -->
+                <button id="colors">colors</button>
+                <button id="rainbow">Rainbow</button>
+                <button id="eraser">Eraser</button>
+                <button id="clear">Clear</button>
+                <!--Slider for the grid-->
+                <div id="gridSize">
+                    <span>Grid: <span id="sliderLabel"></span></span>
+                    <input type="range" min="2" max="26" value="16" id="slider">
+                </div>
             </div>
-        </div>
-        <div id="right">
-            <span>Etch-A-Sketch</span>
-            <div id="wrapper">
+            <div id="right">
+                <div id="wrapper">
+                </div>
             </div>
-        </div>
+        </main>
+        <footer>
+            Designed by Walaalka
+        </footer>
     </div>
 </body>
 </html>

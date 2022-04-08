@@ -32,11 +32,16 @@ const chooseColor = function(colorId){
 //color button
 allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
 const colorOptions = function(e) {
-    if (document.getElementById('colorDiv')) return document.getElementById('colorDiv').remove();
+    if (document.getElementById('colorDiv')) {
+        colors.style.borderRadius = `15%`;
+        return document.getElementById('colorDiv').remove();
+    }
     colorDiv = document.createElement('div');
     colorDiv.setAttribute('id', 'colorDiv');
     colorDiv.style.cssText = "display: grid; grid-template-columns: repeat(3, 1fr);\
-     grid-template-rows: repeat(2, 1fr); border:1px solid black; height: 10vh; width: 75%;"
+     grid-template-rows: repeat(2, 1fr); border:1px solid black; height: 75px; width: 200px;"
+     colors.style.borderBottomLeftRadius = 0;
+     colors.style.borderBottomRightRadius = 0;
     for(let i=0; i<allColors.length; i++) {
         colorBox = document.createElement('div');
         colorBox.setAttribute('id', allColors[i])
@@ -53,7 +58,7 @@ const grid = function(num){
         wrapper.removeChild(wrapper.lastChild);
     }
     wrapper.style.cssText = `display: grid; grid-template-columns: 
-        repeat(${num}, 1fr); grid-template-rows: repeat(${num}, 1fr); width:80%; height:80%; gap:1px;`;
+        repeat(${num}, 1fr); grid-template-rows: repeat(${num}, 1fr); gap:1px;`;
     let identity = 0;
     for(let i=0; i<num; i++) {
         for (let j=0; j<num; j++) {
@@ -161,4 +166,3 @@ const deactivate = function(boolean, node) {
         }
     }
 }
-window.addEventListener('click', () => console.log(color, previuseColor));
