@@ -177,3 +177,18 @@ const footerMargin = function() {
     }
 }
 footerMargin()
+//debounce function for window onresize event
+function debounce(func, wait) {
+    let timeout;
+    return function() {
+        let context = this;
+        let later = function() {
+            timeout = null;
+            func.apply(context)
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    }
+}
+//position footer after window resizing is done
+window.addEventListener('resize', debounce(footerMargin, 1000));
