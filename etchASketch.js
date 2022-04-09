@@ -4,7 +4,6 @@ const rainbow = document.getElementById('rainbow');
 const eraser = document.getElementById('eraser');
 const clear = document.getElementById('clear');
 const gridSize = document.getElementById('gridSize');
-console.log(gridSize);
 const slider = document.getElementById('slider');
 const sliderLabel = document.getElementById('sliderLabel');
 const wrapper = document.getElementById('wrapper');
@@ -180,7 +179,6 @@ const deactivate = function(boolean, node) {
 //push footer to bottom
 const footerMargin = function() {
     let distanceToBottom = window.innerHeight - footer.getBoundingClientRect().bottom;
-    console.log(distanceToBottom);
     if (distanceToBottom > 0) {
         footer.style.marginTop = `${distanceToBottom - 1}px`;
     } else {
