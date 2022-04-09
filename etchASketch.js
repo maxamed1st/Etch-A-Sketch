@@ -2,7 +2,9 @@ const left = document.getElementById('left');
 const colors = document.getElementById('colors');
 const rainbow = document.getElementById('rainbow');
 const eraser = document.getElementById('eraser');
-const clear = document.getElementById('clear')
+const clear = document.getElementById('clear');
+const gridSize = document.getElementById('gridSize');
+console.log(gridSize);
 const slider = document.getElementById('slider');
 const sliderLabel = document.getElementById('sliderLabel');
 const wrapper = document.getElementById('wrapper');
@@ -21,7 +23,9 @@ const setPreviuseColor = function () {
     if (!color.startsWith('#') && !color.startsWith('w')) 
         return previuseColor = color;
 }
-//
+//check if media matches tablet or mobile
+mobOrTab = window.matchMedia("(max-width: 768px)")
+//update color with the value of colorBoxes
 const chooseColor = function(colorDiv){
     left.removeChild(colorDiv);
     deactivate(isRandom, rainbow);
@@ -34,14 +38,16 @@ const chooseColor = function(colorDiv){
 //color button
 allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
 const colorOptions = function(e) {
+    let colorDiv;
     if (document.getElementById('colorDiv')){
+        colorDiv = document.getElementById('colorDiv');
+        left.removeChild(colorDiv);
         colors.style.borderRadius = `15%`;
-        document.getElementById('colorDiv').remove();
     }
     colorDiv = document.createElement('div');
     colorDiv.setAttribute('id', 'colorDiv');
-    colorDiv.style.cssText = "display: grid; grid-template-columns: repeat(3, 1fr);\
-     grid-template-rows: repeat(2, 1fr); border:1px solid black; height: 75px; width: 200px;"
+    colorDiv.style.cssText = `display: grid; grid-template-columns: repeat(3, 1fr);\
+     grid-template-rows: repeat(2, 1fr); border:1px solid black; height: ${colors.offsetHeight}px; width: ${colors.offsetWidth}px;`
      colors.style.borderBottomLeftRadius = 0;
      colors.style.borderBottomRightRadius = 0;
     for(let i=0; i<allColors.length; i++) {
@@ -51,7 +57,12 @@ const colorOptions = function(e) {
         colorBox.onclick = chooseColor.bind(colorBox, colorDiv);
         colorDiv.appendChild(colorBox);
     }
-    left.insertBefore(colorDiv, rainbow);
+    //if mobOrTab is matached insert colorDiv before gridSize else insert before rainbow
+    if (mobOrTab.matches) {
+        left.insertBefore(colorDiv, gridSize);
+    } else {
+        left.insertBefore(colorDiv, rainbow);
+    }
 }
 colors.addEventListener('click', colorOptions);
 //create a num*num grid in the right container

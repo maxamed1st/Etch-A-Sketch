@@ -45,7 +45,7 @@ main {
 #left {
     flex: auto;
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     min-width: max-content;
     min-height: max-content;
     width: 200px;
