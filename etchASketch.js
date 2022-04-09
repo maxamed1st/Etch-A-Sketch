@@ -7,6 +7,7 @@ const slider = document.getElementById('slider');
 const sliderLabel = document.getElementById('sliderLabel');
 const wrapper = document.getElementById('wrapper');
 const currentColor = document.getElementById('currentColor').style;
+const footer = document.querySelector('footer');
 let color= 'brown'
 let previuseColor;
 let isErasing = false;
@@ -165,3 +166,6 @@ const deactivate = function(boolean, node) {
         }
     }
 }
+//push footer to bottom
+distanceToBottom = window.innerHeight - footer.getBoundingClientRect().bottom;
+footer.style.marginTop = `${distanceToBottom}px`;
