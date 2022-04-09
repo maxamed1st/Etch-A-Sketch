@@ -167,5 +167,13 @@ const deactivate = function(boolean, node) {
     }
 }
 //push footer to bottom
-distanceToBottom = window.innerHeight - footer.getBoundingClientRect().bottom - 1;
-footer.style.marginTop = `${distanceToBottom}px`;
+const footerMargin = function() {
+    let distanceToBottom = window.innerHeight - footer.getBoundingClientRect().bottom;
+    console.log(distanceToBottom);
+    if (distanceToBottom > 0) {
+        footer.style.marginTop = `${distanceToBottom - 1}px`;
+    } else {
+        footer.style.marginTop = '8px';
+    }
+}
+footerMargin()
