@@ -91,3 +91,9 @@ footer {
     background: #577590;
     border: 2px darkslategrey solid;
 }
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: white;
+}
