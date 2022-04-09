@@ -7,10 +7,11 @@ const slider = document.getElementById('slider');
 const sliderLabel = document.getElementById('sliderLabel');
 const wrapper = document.getElementById('wrapper');
 const currentColor = document.getElementById('currentColor').style;
-
-//Change color of gridcell on mouseclick
 let color= 'brown'
 let previuseColor;
+let isErasing = false;
+let isRandom = false;
+//Change color of gridcell on mouseclick
 const changeCellColor = function(e) {
     e.target.style.backgroundColor = `${color}`;
 }
@@ -20,21 +21,21 @@ const setPreviuseColor = function () {
         return previuseColor = color;
 }
 //
-const chooseColor = function(colorId){
+const chooseColor = function(colorDiv){
     left.removeChild(colorDiv);
-    deactivate(random, rainbow);
-    deactivate(erasing, eraser);
+    deactivate(isRandom, rainbow);
+    deactivate(isErasing, eraser);
     setPreviuseColor();
-    color=colorId;
+    color=this.id;
     currentColor.background = `${color}`;
     return color;
 }
 //color button
 allColors = ['brown', 'blue', 'green', 'yellow', 'purple', 'black']
 const colorOptions = function(e) {
-    if (document.getElementById('colorDiv')) {
+    if (document.getElementById('colorDiv')){
         colors.style.borderRadius = `15%`;
-        return document.getElementById('colorDiv').remove();
+        document.getElementById('colorDiv').remove();
     }
     colorDiv = document.createElement('div');
     colorDiv.setAttribute('id', 'colorDiv');
@@ -46,7 +47,7 @@ const colorOptions = function(e) {
         colorBox = document.createElement('div');
         colorBox.setAttribute('id', allColors[i])
         colorBox.style.cssText = `background-color: ${colorBox.id}; border: 1px solid black; width:100%; height:100%;`;
-        colorBox.onclick = chooseColor.bind(colorDiv, colorBox.id);
+        colorBox.onclick = chooseColor.bind(colorBox, colorDiv);
         colorDiv.appendChild(colorBox);
     }
     left.insertBefore(colorDiv, rainbow);
@@ -90,21 +91,20 @@ clear.addEventListener('click', () => wrapper.childNodes.forEach(
         return node.style.backgroundColor = 'white';
     }));
 //Erase chosen gridcell
-let erasing = false;
 eraser.addEventListener('click', () => {
-    erasing = !erasing;
-    if (erasing) {
+    isErasing = !isErasing;
+    if (isErasing) {
         rainbowCells(0);
         setPreviuseColor();
-        showState(erasing, eraser);
+        showState(isErasing, eraser);
         currentColor.background = "gray";
         return color = 'white';
     }else {
-        showState(erasing, eraser);
-        if (random) {
+        showState(isErasing, eraser);
+        if (isRandom) {
             randomColor();
             currentColor.background = `${color}`;
-            return rainbowCells(random);
+            return rainbowCells(isRandom);
         }
         currentColor.background = `${previuseColor}`;
         color=previuseColor;
@@ -117,25 +117,24 @@ const randomColor = function() {
     currentColor.background = color;
     return color;
 }
-let random = false;
 rainbow.addEventListener('click', () => {
-    random = !random;
-    if (random){
-        deactivate(erasing, eraser);
-        showState(random, rainbow);
+    isRandom = !isRandom;
+    if (isRandom){
+        deactivate(isErasing, eraser);
+        showState(isRandom, rainbow);
         setPreviuseColor();
         randomColor();
-        rainbowCells(random);
+        rainbowCells(isRandom);
     } else {
-        showState(random, rainbow);
-        rainbowCells(random);
+        showState(isRandom, rainbow);
+        rainbowCells(isRandom);
         currentColor.background = `${previuseColor}`;
         return color = previuseColor;
     }
 })
 //randomize cell colors
-const rainbowCells = function(random) {
-    if(random) {
+const rainbowCells = function(isRandom) {
+    if(isRandom) {
         wrapper.childNodes.forEach(child => child.addEventListener('mouseup', randomColor));
     } else {
         wrapper.childNodes.forEach(child => child.removeEventListener('mouseup', randomColor));
@@ -153,16 +152,16 @@ const showState = function(boolean, node) {
 const deactivate = function(boolean, node) {
     if (node===rainbow) {
         if(boolean) {
-            random = !random;
-            rainbowCells(random);
-            showState(random, rainbow);
-            return random;
+            isRandom = !isRandom;
+            rainbowCells(isRandom);
+            showState(isRandom, rainbow);
+            return isRandom;
         }
-    }else {
+    } else {
         if (boolean) {
-            erasing = !erasing;
-            showState(erasing, eraser);
-            return erasing;
+            isErasing = !isErasing;
+            showState(isErasing, eraser);
+            return isErasing;
         }
     }
 }
